@@ -1,6 +1,6 @@
 CREATE TABLE employee(employee_name VARCHAR(10) PRIMARY KEY, street VARCHAR(10), city VARCHAR(10));
 
-CREATE TABLE works(employee_name VARCHAR(10), company_name VARCHAR(10) PRIMARY KEY, salary INT(8), CONSTRAINT FK_empname FOREIGN (employee_name) REFERENCES employee(employee_name));
+CREATE TABLE works(employee_name VARCHAR(10), company_name VARCHAR(10) PRIMARY KEY, salary INT(8), CONSTRAINT FK_empname FOREIGN KEY (employee_name) REFERENCES employee(employee_name));
 
 CREATE TABLE company(company_name VARCHAR(10) PRIMARY KEY, city VARCHAR(10));
 
