@@ -107,6 +107,8 @@ SELECT e1.employee_name FROM employee e1, works w1 WHERE e1.employee_name=w1.emp
 | bob           |
 +---------------+
 
+SELECT b.company_name FROM company AS a INNER JOIN company AS b ON a.city=b.city WHERE a.company_name="ICICI" AND b.company_name!="ICICI";
+
 SELECT company_name FROM(SELECT w.company_name, SUM(w.salary) AS payroll FROM employee e, works w WHERE e.employee_name=w.employee_name GROUP BY(w.company_name)) as tb WHERE payroll=(SELECT MIN(payroll) FROM(SELECT w.company_name, SUM(w.salary) AS payroll FROM employee e, works w WHERE e.employee_name=w.employee_name GROUP BY(w.company_name)) as tb1);
 
 +--------------+
