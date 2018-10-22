@@ -1,12 +1,12 @@
-CREATE TABLE actor(act_id INT PRIMARY KEY, act_name varchar(25), act_gender char);
+CREATE TABLE actor(Act_id INT PRIMARY KEY, Act_Name varchar(25), Act_Gender char);
 
-CREATE TABLE director(dir_id int PRIMARY KEY, dir_name varchar(10), dir_phone int(10));
+CREATE TABLE director(Dir_id int PRIMARY KEY, Dir_Name varchar(10), Dir_Phone int(10));
 
-CREATE TABLE movies(mov_id int PRIMARY KEY, mov_title varchar(10), mov_year int, mov_lang varchar(10), dir_id int, FOREIGN KEY(dir_id) REFERENCES director(dir_id));
+CREATE TABLE movies(Mov_id int PRIMARY KEY, Mov_Title varchar(10), Mov_Year int, Mov_Lang varchar(10), Dir_id int, FOREIGN KEY(Dir_id) REFERENCES director(Dir_id));
 
-CREATE TABLE movie_cast(act_id int, mov_id int, role varchar(10), FOREIGN KEY(act_id) REFERENCES actor(act_id), FOREIGN KEY(mov_id) REFERENCES movies(mov_id));
+CREATE TABLE movie_cast(Act_id int, Mov_id int, Role varchar(10), FOREIGN KEY(Act_id) REFERENCES actor(Act_id), FOREIGN KEY(Mov_id) REFERENCES movies(Mov_id));
 
-CREATE TABLE rating(mov_id int, rev_start int, FOREIGN KEY(mov_id) REFERENCES movies(mov_id));
+CREATE TABLE rating(Mov_id int, Rev_Stars int, FOREIGN KEY(Mov_id) REFERENCES movies(Mov_id));
 
 INSERT INTO director VALUES(1, 'Stephen', 12344556);
 INSERT INTO director VALUES(2, 'Michael', 12344553);
@@ -54,4 +54,15 @@ insert into movie_cast values(1, 2, "lead");
 +------------+
 | Matt Damon |
 +------------+
+
+4. select Mov_Title, MAX(Rev_Stars) from rating
+join movies on movies.Mov_id=rating.Mov_id
+group by movies.Mov_id
+order by Mov_Title;
+
+5. update rating set Rev_Stars=4 where Mov_id in (select Mov_id from movies where Dir_id=(select Dir_id from director where Dir_Name="Stephen");
+
+6. SELECT Dir_Name, Mov_Title FROM  director NATURAL JOIN movies NATURAL JOIN movie_cast WHERE Role IS NOT NULL AND Mov_Title='Innocents';
+
+7. SELECT Mov_Title FROM movies WHERE Mov_id NOT IN (SELECT Mov_id FROM rating);
 
