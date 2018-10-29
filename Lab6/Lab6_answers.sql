@@ -48,7 +48,10 @@ insert into movie_cast values(1, 2, "lead");
 +------------+
 
 
-3. select distinct(Act_name) from actor inner join movie_cast on actor.Act_id=movie_cast.Act_id inner join (select Mov_id from movies where Mov_Year<2010 or Mov_Year>2017) as x on movie_cast.Mov_id=x.Mov_id; 
+3. select distinct Act_name
+from actor, movies m1, movies m2, movie_cast
+where actor.Act_id = movie_cast.Act_id and movie_cast.Mov_id = m1.Mov_id and 
+	movie_cast.Mov_id = m2.Mov_id and m1.<Mov_Year<2010 and m2.Mov_Year>2017;
 +------------+
 | Act_name   |
 +------------+
